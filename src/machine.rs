@@ -43,7 +43,7 @@ pub struct Machine {
     sp: u8,
     delay_timer: u8,
     sound_timer: u8,
-    display: [bool; 64 * 32],
+    pub display: [bool; 64 * 32],
     keypad: [bool; 16],
     rand: StdRand,
 }
@@ -423,13 +423,25 @@ impl Machine {
         }
     }
 
-    fn update_timers(&mut self) {
+    pub fn update_timers(&mut self) {
         if self.delay_timer > 0 {
             self.delay_timer -= 1;
         }
 
         if self.sound_timer > 0 {
             self.sound_timer -= 1;
+        }
+    }
+
+    pub fn keydown(&mut self, key: usize) {
+        if key < 16 {
+            self.keypad[key] = true;
+        }
+    }
+
+    pub fn keyup(&mut self, key: usize) {
+        if key < 16 {
+            self.keypad[key] = false;
         }
     }
 }

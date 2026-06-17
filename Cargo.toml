@@ -4,6 +4,5 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-pixels = "0.17.1"
+macroquad = "0.4.15"
 tinyrand = "0.5.0"
-winit = "0.30.13"

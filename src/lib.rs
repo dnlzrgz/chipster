@@ -1,1 +1,2 @@
-mod machine;
+pub mod input;
+pub mod machine;
