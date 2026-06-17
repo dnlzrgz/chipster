@@ -1,12 +1,22 @@
+use std::path::PathBuf;
 use std::time::{Duration, Instant};
 
 use chipster::input::KEY_MAPPINGS;
 use chipster::machine::Machine;
+use clap::Parser;
 use macroquad::prelude::*;
 
 const CHIP8_WIDTH: u32 = 64;
 const CHIP8_HEIGHT: u32 = 32;
 const WINDOW_SCALE: u32 = 10;
+
+#[derive(Parser)]
+#[command(version, about="CHIP-8 emulator written in Rust.", long_about=None)]
+struct Cli {
+    // Path to the CHIP-8 ROM file.
+    #[arg(value_hint=clap::ValueHint::FilePath)]
+    rom_path: PathBuf,
+}
 
 fn window_conf() -> Conf {
     Conf {
@@ -20,9 +30,10 @@ fn window_conf() -> Conf {
 
 #[macroquad::main(window_conf)]
 async fn main() {
+    let cli = Cli::parse();
     let mut m = Machine::new();
-    if let Err(e) = m.load_rom("./demos/Trip8 Demo (2008) [Revival Studios].ch8") {
-        eprintln!("Failed to load ROM: {}", e);
+    if let Err(e) = m.load_rom(&cli.rom_path) {
+        eprintln!("Failed to load ROM at '{}': {}", cli.rom_path.display(), e);
         return;
     }
 
@@ -67,7 +78,6 @@ async fn main() {
             }
         }
 
-        print!("\rfps: {}", macroquad::time::get_fps());
         next_frame().await
     }
 }

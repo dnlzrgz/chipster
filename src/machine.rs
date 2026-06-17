@@ -113,10 +113,8 @@ impl Machine {
     }
 
     fn fetch_opcode(&self) -> u16 {
-        // TODO: Check if return Result is better.
         let hi = self.memory[self.pc as usize] as u16;
         let lo = self.memory[self.pc as usize + 1] as u16;
-
         (hi << 8) | lo
     }
 
