@@ -53,4 +53,4 @@ cargo run --release -- "./demos/Maze (alt) [David Winter, 199x].ch8"
 - [Building a CHIP-8 Emulator \[C++\]](https://austinmorlan.com/posts/chip8_emulator/) is a clearer and deeper explanation.
 
 > [!NOTE]
-> The ROM in this repository have been extracted from [kripod/chip8-roms](https://github.com/kripod/chip8-roms).
+> The ROMs in this repository have been extracted from [kripod/chip8-roms](https://github.com/kripod/chip8-roms).
